@@ -110,15 +110,19 @@ def metric_grading_system(all_grades, threshold):
 
 def set_grade_thresholds():
 
+    grades_order = ["A", "B", "C", "D", "E", "U"]
+
     Default_thresholds = input(
         "Do you want to use default grade thresholds or custom grade thresholds?\nEnter (d) for default or (c) for custom: "
-    ).lower()
+    ).strip().lower()
 
+    # CRITICAL FIX: If default is chosen, return immediately to bypass the custom loop below
     if Default_thresholds == "d":
         threshold = {"A": 90, "B": 80, "C": 70, "D": 60, "E": 50, "U": 0}
-    else:
-        threshold = {}
-        grades_order = ["A", "B", "C", "D", "E", "U"]
+        return threshold
+    
+    # Otherwise, continue to custom setup
+    threshold = {}
 
     while True:
         try:
